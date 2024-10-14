@@ -16,12 +16,10 @@ import useAuth from "./hooks/useAuth";
 import { AppointmentProvider } from "./components/context/AppointmentProvider";
 
 function App() {
-  const { auth, setAuth } = useAuth();
+  const { auth } = useAuth();
   const refresh = useRefreshToken();
 
   return (
-    // <Maintainer />
-
     <Routes>
       <Route path="/" element={<Layout />}>
         {/* Public Routes */}
@@ -51,7 +49,14 @@ function App() {
         </Route>
 
         <Route element={<RequireAuth allowedRoles={["maintainer"]} />}>
-          <Route path="maintainer" element={<Maintainer />} />
+          <Route
+            path="maintainer"
+            element={
+              <AppointmentProvider>
+                <Maintainer />
+              </AppointmentProvider>
+            }
+          />
         </Route>
 
         <Route path="*" element={<Missing />} />
