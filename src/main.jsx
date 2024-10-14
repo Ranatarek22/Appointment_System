@@ -19,13 +19,13 @@ import { AppointmentProvider } from "./components/context/AppointmentProvider.js
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <AuthProvider>
-      <AppointmentProvider>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/*" element={<App />} />
-          </Routes>
-        </BrowserRouter>
-      </AppointmentProvider>
+      {/* <AppointmentProvider> */}
+      <BrowserRouter>
+        <Routes>
+          <Route path="/*" element={<App />} />
+        </Routes>
+      </BrowserRouter>
+      {/* </AppointmentProvider> */}
     </AuthProvider>
   </StrictMode>
 );
