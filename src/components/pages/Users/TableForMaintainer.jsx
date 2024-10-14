@@ -1,8 +1,5 @@
-
-
 import React, { useState, useContext } from "react";
 import { motion } from "framer-motion";
-import Sidebar from "../../navigation/Sidebar";
 import {
   Modal,
   Box,
@@ -12,7 +9,7 @@ import {
   FormControlLabel,
   Checkbox,
 } from "@mui/material";
-import { AppointmentContext } from "../../context/AppointmentProvider"; 
+import { AppointmentContext } from "../../context/AppointmentProvider";
 import useAuth from "../../../hooks/useAuth";
 
 const style = {
@@ -28,7 +25,7 @@ const style = {
 };
 
 const TableForMaintainer = () => {
-  const { appointments, addAppointment } = useContext(AppointmentContext); 
+  const { appointments, addAppointment } = useContext(AppointmentContext);
   const [open, setOpen] = useState(false);
   const { auth } = useAuth();
   const handleOpen = () => setOpen(true);
@@ -56,7 +53,7 @@ const TableForMaintainer = () => {
     const formattedToTime = `${formData.to_time}:00Z`;
 
     const appointmentData = {
-      company: +auth.company, 
+      company: +auth.company,
       from_time: formattedFromTime,
       to_time: formattedToTime,
       slots: +formData.slots,
@@ -64,7 +61,6 @@ const TableForMaintainer = () => {
     };
 
     try {
-     
       await addAppointment(appointmentData);
 
       setFormData({
@@ -73,7 +69,8 @@ const TableForMaintainer = () => {
         slots: "",
         active: false,
       });
-      handleClose();
+
+      handleClose(); 
     } catch (error) {
       console.error("Error creating appointment:", error);
     }
@@ -159,7 +156,7 @@ const TableForMaintainer = () => {
       </div>
 
       <div className="max-w-4xl  w-[100%] shadow-lg rounded-lg border mt-[10%] border-gray-200 bg-white mx-auto p-4">
-        <h2 className="text-2xl font-bold mb-4">الجدول الاسبوعى</h2>
+        <h2 className="text-2xl font-bold mb-4">جدول المواعيد</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {appointments.map((appointment, index) => (
             <motion.div

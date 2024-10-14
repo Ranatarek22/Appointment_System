@@ -14,10 +14,10 @@ import {
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { apiInstance } from "../../../axios";
 import useAuth from "../../../hooks/useAuth";
-import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline"; 
+import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 const AllMaintainers = () => {
   const [maintainers, setMaintainers] = useState([]);
-  const { auth } = useAuth(); 
+  const { auth } = useAuth();
   const [openModal, setOpenModal] = useState(false);
 
   useEffect(() => {
@@ -27,7 +27,7 @@ const AllMaintainers = () => {
           "/reservations/appointments/companies/",
           {
             headers: {
-              Authorization: `Bearer ${auth.accessToken}`, 
+              Authorization: `Bearer ${auth.accessToken}`,
             },
           }
         );
@@ -40,6 +40,36 @@ const AllMaintainers = () => {
     fetchMaintainers();
   }, [auth.accessToken]);
 
+  //   const reserveAppointment = async (appointmentId) => {
+  //     try {
+  //       const response = await apiInstance.post(
+  //         `/reservations/appointments/${appointmentId}/reserve/`,
+  //         {},
+  //         {
+  //           headers: {
+  //             Authorization: `Bearer ${auth.accessToken}`,
+  //           },
+  //         }
+  //       );
+  //       const updatedSlotsLeft = response.data.slots_left;
+  //       console.log(updatedSlotsLeft + " " + appointmentId);
+
+  //       setMaintainers((prevMaintainers) =>
+  //         prevMaintainers.map((maintainer) => ({
+  //           ...maintainer,
+  //           appointments: maintainer.appointments.map((appointment) =>
+  //             appointment.id === appointmentId
+  //               ? { ...appointment, slots_left: updatedSlotsLeft }
+  //               : appointment
+  //           ),
+  //         }))
+  //       );
+  //       setOpenModal(true);
+  //     } catch (error) {
+  //       console.error("Error reserving appointment:", error);
+  //       alert("Error reserving the appointment. Please try again.");
+  //     }
+  //   };
   const reserveAppointment = async (appointmentId) => {
     try {
       const response = await apiInstance.post(
@@ -51,15 +81,15 @@ const AllMaintainers = () => {
           },
         }
       );
-      const updatedSlotsLeft = response.data.slots_left;
-      console.log(updatedSlotsLeft + " " + appointmentId);
+      console.log("Response from server:", response.data); 
 
+      const updatedSlotsLeft = response.data.slots_left; 
       setMaintainers((prevMaintainers) =>
         prevMaintainers.map((maintainer) => ({
           ...maintainer,
           appointments: maintainer.appointments.map((appointment) =>
             appointment.id === appointmentId
-              ? { ...appointment, slots_left: updatedSlotsLeft }
+              ? { ...appointment, slots: updatedSlotsLeft } 
               : appointment
           ),
         }))
@@ -92,70 +122,72 @@ const AllMaintainers = () => {
                   <Typography variant="h6">{maintainer.name}</Typography>
                 </div>
               </div>
-
               <Divider className="my-2" />
-
               {maintainer.appointments.length > 0 ? (
                 <div className="flex gap-4 overflow-x-scroll w-full">
                   <div className="flex flex-nowrap gap-4">
-                    {maintainer.appointments.map((appointment) => (
-                      <Card
-                        key={appointment.id}
-                        className="w-[300px] p-4 flex-shrink-0 transition-shadow hover:shadow-lg"
-                      >
-                        <CardContent>
-                          <Typography variant="body2">
-                            <div>
-                              {new Date(
-                                appointment.from_time
-                              ).toLocaleDateString("ar-EG", {
-                                weekday: "long",
-                                year: "numeric",
-                                month: "long",
-                                day: "numeric",
-                              })}
-                            </div>
-                            <strong>من </strong>
-                            <div>
-                              {new Date(
-                                appointment.from_time
-                              ).toLocaleTimeString("ar-EG")}
-                            </div>
-                          </Typography>
-                          <Typography variant="body2">
-                            <strong>الى </strong>
-
-                            <div>
-                              {new Date(appointment.to_time).toLocaleTimeString(
-                                "ar-EG"
-                              )}
-                            </div>
-                          </Typography>
-                          <Typography variant="body2">
-                            <strong>عدد الفترات المتاحة </strong>{" "}
-                            {appointment.slots_left || appointment.slots}
-                          </Typography>
-                          <Typography variant="body2">
-                            <strong>الحاله </strong>
-                            <CheckCircleIcon
-                              style={{
-                                color: appointment.active ? "green" : "red",
-                              }}
-                            />{" "}
-                          </Typography>
-                          <Divider className="my-2" />
-                          <Button
-                            variant="contained"
-                            color="primary"
-                            onClick={() => reserveAppointment(appointment.id)}
-                            disabled={!appointment.active}
-                            className="md:w-full"
-                          >
-                            احجز
-                          </Button>
-                        </CardContent>
-                      </Card>
-                    ))}
+                    {maintainer.appointments
+                      .filter((appointment) => appointment.slots > 0) 
+                      .map((appointment) => (
+                        <Card
+                          key={appointment.id}
+                          className="w-[300px] p-4 flex-shrink-0 transition-shadow hover:shadow-lg"
+                        >
+                          <CardContent>
+                            <Typography variant="body2">
+                              <div>
+                                {new Date(
+                                  appointment.from_time
+                                ).toLocaleDateString("ar-EG", {
+                                  weekday: "long",
+                                  year: "numeric",
+                                  month: "long",
+                                  day: "numeric",
+                                })}
+                              </div>
+                              <strong>من </strong>
+                              <div>
+                                {new Date(
+                                  appointment.from_time
+                                ).toLocaleTimeString("ar-EG")}
+                              </div>
+                            </Typography>
+                            <Typography variant="body2">
+                              <strong>الى </strong>
+                              <div>
+                                {new Date(
+                                  appointment.to_time
+                                ).toLocaleTimeString("ar-EG")}
+                              </div>
+                            </Typography>
+                            <Typography variant="body2">
+                              <strong>عدد الفترات </strong> {appointment.slots}
+                            </Typography>
+                            <Typography variant="body2">
+                              <strong>عدد الفترات المتاحة </strong>{" "}
+                              {appointment.slots_left}
+                            </Typography>
+                            <Typography variant="body2">
+                              <strong>الحاله </strong>
+                              <CheckCircleIcon
+                                style={{
+                                  color: appointment.active ? "green" : "red",
+                                }}
+                              />{" "}
+                            </Typography>
+                            <Divider className="my-2" />
+                            <Button
+                              variant="contained"
+                              color="primary"
+                              onClick={() => reserveAppointment(appointment.id)}
+                              disabled={!appointment.active}
+                              className="md:w-full"
+                            >
+                              احجز
+                            </Button>
+                          </CardContent>
+                        </Card>
+                      ))}
                   </div>
                 </div>
               ) : (
