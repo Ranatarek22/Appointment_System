@@ -56,10 +56,10 @@ export const AppointmentProvider = ({ children }) => {
         }
       );
 
-      // Update state with the new appointment
+   
       setAppointments((prevAppointments) => [
         ...prevAppointments,
-        response.data, // Add the newly created appointment
+        response.data, 
       ]);
     } catch (error) {
       console.error("Error creating appointment:", error);

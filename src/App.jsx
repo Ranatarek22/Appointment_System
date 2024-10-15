@@ -52,9 +52,7 @@ function App() {
         </Route>
 
         <Route element={<RequireAuth allowedRoles={["maintainer"]} />}>
-   
             <Route path="maintainer" element={<Maintainer />} />
-     
         </Route>
 
         <Route path="*" element={<Missing />} />

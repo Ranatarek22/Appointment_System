@@ -81,15 +81,15 @@ const AllMaintainers = () => {
           },
         }
       );
-      console.log("Response from server:", response.data); 
+      console.log("Response from server:", response.data);
 
-      const updatedSlotsLeft = response.data.slots_left; 
+      const updatedSlotsLeft = response.data.slots_left;
       setMaintainers((prevMaintainers) =>
         prevMaintainers.map((maintainer) => ({
           ...maintainer,
           appointments: maintainer.appointments.map((appointment) =>
             appointment.id === appointmentId
-              ? { ...appointment, slots: updatedSlotsLeft } 
+              ? { ...appointment, slots: updatedSlotsLeft }
               : appointment
           ),
         }))
@@ -108,7 +108,7 @@ const AllMaintainers = () => {
   return (
     <div className="flex flex-col gap-4 px-4 py-6">
       {maintainers.length === 0 ? (
-        <p>No maintainers available</p>
+        <p>لا يوجد شركه متاحه</p>
       ) : (
         maintainers.map((maintainer) => (
           <Card key={maintainer.id} className="w-[80%] mx-auto p-4">
@@ -127,7 +127,7 @@ const AllMaintainers = () => {
                 <div className="flex gap-4 overflow-x-scroll w-full">
                   <div className="flex flex-nowrap gap-4">
                     {maintainer.appointments
-                      .filter((appointment) => appointment.slots > 0) 
+                      .filter((appointment) => appointment.slots > 0)
                       .map((appointment) => (
                         <Card
                           key={appointment.id}
