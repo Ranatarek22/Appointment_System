@@ -14,7 +14,7 @@ import axios from "axios";
 import useAuth from "../../../hooks/useAuth";
 import { apiInstance } from "../../../axios";
 
-const Appointments = () => {
+const AppointmentsDriverTable = () => {
   const [appointments, setAppointments] = useState([]);
   const { auth } = useAuth();
 
@@ -53,7 +53,7 @@ const Appointments = () => {
             <TableCell style={{ textAlign: "right" }}>من</TableCell>
             <TableCell style={{ textAlign: "right" }}>الى</TableCell>
             <TableCell style={{ textAlign: "right" }}>الحالة</TableCell>
-            <TableCell style={{ textAlign: "right" }}>الإجراءات</TableCell>
+            {/* <TableCell style={{ textAlign: "right" }}>الإجراءات</TableCell> */}
           </TableRow>
         </TableHead>
         <TableBody>
@@ -88,9 +88,9 @@ const Appointments = () => {
                   {appointment.appointment.fulfilled ? "مكتملة" : "غير مكتملة"}
                 </Button>
               </TableCell>
-              <TableCell style={{ textAlign: "right" }}>
+              {/* <TableCell style={{ textAlign: "right" }}>
                 <Button variant="outlined">تفاصيل</Button>
-              </TableCell>
+              </TableCell> */}
             </TableRow>
           ))}
         </TableBody>
@@ -99,4 +99,4 @@ const Appointments = () => {
   );
 };
 
-export default Appointments;
+export default AppointmentsDriverTable;

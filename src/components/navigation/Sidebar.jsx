@@ -14,9 +14,7 @@ const Sidebar = ({ open, onClose }) => {
     setAuth({});
     navigate("/");
   };
-  const appointmentsNavigation = () => {
-    navigate("/drivappoint");
-  };
+
   return (
     <div
       className={`fixed right-0 top-0 h-screen bg-gradient-to-b from-[#2A3D6D] to-[#1B2A55] text-white flex flex-col z-10 transition-transform transform lg:w-[20%] md:w-[30%] lg:translate-x-0 md:translate-x-0 ${
@@ -42,12 +40,26 @@ const Sidebar = ({ open, onClose }) => {
             <div>
               <li
                 className="flex items-center p-4 hover:bg-white hover:text-black transition duration-300 cursor-pointer"
-                onClick={appointmentsNavigation}
+                onClick={() => {
+                  navigate("/drivappoint");
+                }}
               >
                 <span className="ml-3">المواعيد</span>
               </li>
               <li className="flex items-center p-4 hover:bg-white hover:text-black transition duration-300 cursor-pointer">
                 <span className="ml-3">شركات الصيانه</span>
+              </li>
+            </div>
+          )}
+          {auth.role === "maintainer" && (
+            <div>
+              <li
+                className="flex items-center p-4 hover:bg-white hover:text-black transition duration-300 cursor-pointer"
+                onClick={() => {
+                  navigate("/maintappoint");
+                }}
+              >
+                <span className="ml-3">المواعيد</span>
               </li>
             </div>
           )}

@@ -14,8 +14,9 @@ import BlockRoutes from "./components/routes/blockRoutes";
 import useRefreshToken from "./hooks/useRefreshToken";
 import useAuth from "./hooks/useAuth";
 import { AppointmentProvider } from "./components/context/AppointmentProvider";
-import Appointments from "./components/pages/Appointments/Appointments";
+import Appointments from "./components/pages/Appointments/AppointmentsDriverTable";
 import DriverAppointments from "./components/pages/Appointments/DriverAppointments";
+import MaintainerAppointments from "./components/pages/Appointments/MaintainerAppointments";
 
 function App() {
   const { auth, setAuth } = useAuth();
@@ -63,6 +64,7 @@ function App() {
 
         <Route element={<RequireAuth allowedRoles={["maintainer"]} />}>
           <Route path="maintainer" element={<Maintainer />} />
+          <Route path="/maintappoint" element={<MaintainerAppointments />} />
         </Route>
 
         <Route path="*" element={<Missing />} />

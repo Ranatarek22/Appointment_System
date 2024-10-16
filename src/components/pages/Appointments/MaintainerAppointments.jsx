@@ -3,9 +3,9 @@ import React, { useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 
-import Appointments from "./AppointmentsDriverTable";
+import Appointments from "./AppointmentsMaintainerTable";
 import Sidebar from "../../navigation/Sidebar";
-const DriverAppointments = () => {
+const MaintainerAppointments = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const toggleSidebar = () => {
@@ -30,4 +30,4 @@ const DriverAppointments = () => {
   );
 };
 
-export default DriverAppointments;
+export default MaintainerAppointments;
