@@ -19,10 +19,9 @@ function App() {
   const { auth, setAuth } = useAuth();
   const refresh = useRefreshToken();
 
-
   return (
     // <Maintainer />
-    
+
     <Routes>
       <Route path="/" element={<Layout />}>
         {/* Public Routes */}
@@ -44,7 +43,15 @@ function App() {
         />
         <Route path="linkpage" element={<LinkPage />} />
         <Route path="unauthorized" element={<Unauthorized />} />
-        <Route path="/" index element={<Home />} />
+        <Route
+          path="/"
+          index
+          element={
+            <BlockRoutes>
+              <Home />
+            </BlockRoutes>
+          }
+        />
 
         {/* Protected Routes - Role based access */}
         <Route element={<RequireAuth allowedRoles={["driver"]} />}>
@@ -52,7 +59,7 @@ function App() {
         </Route>
 
         <Route element={<RequireAuth allowedRoles={["maintainer"]} />}>
-            <Route path="maintainer" element={<Maintainer />} />
+          <Route path="maintainer" element={<Maintainer />} />
         </Route>
 
         <Route path="*" element={<Missing />} />
