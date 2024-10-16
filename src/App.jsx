@@ -10,7 +10,7 @@ import RequireAuth from "./components/RequiredAuth";
 import Home from "./components/pages/Home";
 import Driver from "./components/pages/Users/Driver";
 import Maintainer from "./components/pages/Users/Maintainer";
-import BlockRoutes from "./components/routes/BlockRoutes";
+import BlockRoutes from "./components/routes/blockRoutes";
 import useRefreshToken from "./hooks/useRefreshToken";
 import useAuth from "./hooks/useAuth";
 import { AppointmentProvider } from "./components/context/AppointmentProvider";
