@@ -14,12 +14,16 @@ import BlockRoutes from "./components/routes/blockRoutes";
 import useRefreshToken from "./hooks/useRefreshToken";
 import useAuth from "./hooks/useAuth";
 import { AppointmentProvider } from "./components/context/AppointmentProvider";
+import Appointments from "./components/pages/Appointments/Appointments";
+import DriverAppointments from "./components/pages/Appointments/DriverAppointments";
 
 function App() {
   const { auth, setAuth } = useAuth();
   const refresh = useRefreshToken();
 
   return (
+    // <Appointments />
+
     <Routes>
       <Route path="/" element={<Layout />}>
         {/* Public Routes */}
@@ -54,6 +58,7 @@ function App() {
         {/* Protected Routes - Role-based access */}
         <Route element={<RequireAuth allowedRoles={["driver"]} />}>
           <Route path="driver" element={<Driver />} />
+          <Route path="drivappoint" element={<DriverAppointments />} />
         </Route>
 
         <Route element={<RequireAuth allowedRoles={["maintainer"]} />}>

@@ -161,19 +161,8 @@ const AllMaintainers = () => {
                               </div>
                             </Typography>
                             <Typography variant="body2">
-                              <strong>عدد الفترات </strong> {appointment.slots}
-                            </Typography>
-                            <Typography variant="body2">
-                              <strong>عدد الفترات المتاحة </strong>{" "}
-                              {appointment.slots_left}
-                            </Typography>
-                            <Typography variant="body2">
-                              <strong>الحاله </strong>
-                              <CheckCircleIcon
-                                style={{
-                                  color: appointment.active ? "green" : "red",
-                                }}
-                              />{" "}
+                              <strong>عدد الاماكن المتاحه</strong>{" "}
+                              {appointment.slots}
                             </Typography>
                             <Divider className="my-2" />
                             <Button
@@ -204,7 +193,7 @@ const AllMaintainers = () => {
         <DialogTitle>نجح الحجز</DialogTitle>
         <DialogContent className="flex flex-col items-center">
           <CheckCircleOutlineIcon style={{ fontSize: 50, color: "green" }} />
-          <Typography>لقد قمت بحجز الموعد بنجاح!</Typography>
+          <Typography>"لقد قمت بحجز مكان في الموعد بنجاح!"</Typography>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCloseModal} color="primary">

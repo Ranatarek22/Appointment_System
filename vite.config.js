@@ -10,4 +10,10 @@ export default defineConfig({
   build: {
     outDir: "dist", // Change this to your desired output directory
   },
+  resolve: {
+    alias: {
+      "stylis-plugin-rtl":
+        "node_modules/stylis-plugin-rtl/dist/stylis-plugin-rtl.js",
+    },
+  },
 });
