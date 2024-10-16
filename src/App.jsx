@@ -58,7 +58,7 @@ function App() {
         {/* Protected Routes - Role-based access */}
         <Route element={<RequireAuth allowedRoles={["driver"]} />}>
           <Route path="driver" element={<Driver />} />
-          <Route path="drivappoint" element={<DriverAppointments />} />
+          <Route path="/drivappoint" element={<DriverAppointments />} />
         </Route>
 
         <Route element={<RequireAuth allowedRoles={["maintainer"]} />}>

@@ -10,7 +10,7 @@ import {
   Avatar,
   Button,
 } from "@mui/material";
-import axios from "axios"; 
+import axios from "axios";
 import useAuth from "../../../hooks/useAuth";
 import { apiInstance } from "../../../axios";
 
@@ -18,12 +18,11 @@ const Appointments = () => {
   const [appointments, setAppointments] = useState([]);
   const { auth } = useAuth();
 
-  
   useEffect(() => {
     const fetchAppointments = async () => {
       try {
         const response = await apiInstance.get(
-          "https://rentty-beta.fly.dev/reservations/driver/appointments/",
+          "/reservations/driver/appointments/",
           {
             headers: {
               Authorization: `Bearer ${auth.accessToken}`,

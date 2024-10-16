@@ -3,7 +3,6 @@ import Sidebar from "../../navigation/Sidebar";
 import AllMaintainers from "./AllMaintainers";
 import MenuIcon from "@mui/icons-material/Menu";
 
-
 const Driver = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 

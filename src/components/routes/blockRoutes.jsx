@@ -15,7 +15,7 @@ const BlockRoutes = ({ children }) => {
       } catch (error) {
         console.error("Token refresh failed", error);
       } finally {
-        setLoading(false);
+        setLoading(false); 
       }
     };
 
