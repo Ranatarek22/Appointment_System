@@ -13,7 +13,7 @@ export const AuthProvider = ({ children }) => {
       accessToken: savedAccessToken || "",
       refreshToken: savedRefreshToken || "",
       role: "",
-      isAuthenticated: 1,
+      isAuthenticated: !!savedAccessToken,
       username: "",
       company: "",
     };
@@ -29,7 +29,7 @@ export const AuthProvider = ({ children }) => {
 
       return {
         role: response.data.role,
-        isAuthenticated: auth.isAuthenticated,
+        isAuthenticated: true,
         username: response.data.username,
         company: response.data.company,
       };
@@ -44,15 +44,16 @@ export const AuthProvider = ({ children }) => {
       if (auth.accessToken) {
         const userData = await fetchUserData(auth.accessToken);
         if (userData) {
-          console.log("userData" + userData.data);
-
           setAuth((prevAuth) => ({
             ...prevAuth,
             ...userData,
           }));
+        } else {
+          await refresh();
         }
       }
     };
+
     fetchData();
   }, [auth.accessToken]);
 

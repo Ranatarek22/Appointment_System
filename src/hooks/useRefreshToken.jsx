@@ -7,37 +7,30 @@ const useRefreshToken = () => {
   const { auth, setAuth } = useAuth();
 
   const refresh = async () => {
-  
-    if (!auth?.role) {
-      console.log("User is not authenticated. Skipping token refresh.");
-      return; 
+    if (!auth?.refreshToken) {
+      console.log("No refresh token available. Skipping refresh.");
+      return;
     }
 
     try {
-      console.log(auth.refreshToken);
-
       const response = await apiInstance.post(
         "/users/token/refresh/",
-        { refresh: auth?.refreshToken },
+        { refresh: auth.refreshToken },
         { withCredentials: true }
       );
 
       const newAccessToken = response.data.access;
+      console.log(newAccessToken);
 
-      setAuth((prev) => {
-        console.log("Previous Auth: loll:", JSON.stringify(prev));
-        console.log("New Access Token: loll:", newAccessToken);
+      setAuth((prev) => ({
+        ...prev,
+        accessToken: newAccessToken,
+        isAuthenticated: true, 
+      }));
 
-        Cookies.set("accessToken", newAccessToken, {
-          secure: true,
-          sameSite: "Strict",
-        });
-
-        return {
-          ...prev,
-          accessToken: newAccessToken,
-          isAuthenticated: prev?.isAuthenticated,
-        };
+      Cookies.set("accessToken", newAccessToken, {
+        secure: true,
+        sameSite: "Strict",
       });
 
       return newAccessToken;
@@ -47,16 +40,9 @@ const useRefreshToken = () => {
   };
 
   useEffect(() => {
-    if (!auth?.role) {
-      console.log("User is not authenticated. Skipping token refresh.");
-      return; // Skip the API call if the user is not authenticated
-    }
-
-    const intervalId = setInterval(() => {
+    if (auth?.refreshToken) {
       refresh();
-    }, 15000);
-
-    return () => clearInterval(intervalId);
+    }
   }, [auth?.refreshToken]);
 
   return refresh;

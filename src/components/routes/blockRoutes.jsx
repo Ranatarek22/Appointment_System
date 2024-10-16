@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import useRefreshToken from "../../hooks/useRefreshToken";
 
 const BlockRoutes = ({ children }) => {
   const { auth } = useAuth();
   const refresh = useRefreshToken();
-  const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
-  const isAuthenticated = auth?.isAuthenticated;
-  const role = auth?.role;
 
   useEffect(() => {
     const verifyAuth = async () => {
@@ -22,22 +19,23 @@ const BlockRoutes = ({ children }) => {
       }
     };
 
-    if (!isAuthenticated) {
+    if (!auth.isAuthenticated) {
       verifyAuth();
     } else {
-      
-      if (role === "driver") {
-        navigate("/driver", { replace: true });
-      } else if (role === "maintainer") {
-        navigate("/maintainer", { replace: true });
-      } else {
-        setLoading(false); 
-      }
+      setLoading(false);
     }
-  }, [isAuthenticated, refresh, navigate, role]);
+  }, [auth.isAuthenticated, refresh]);
 
   if (loading) {
-    return <div>Loading...</div>; 
+    return <div>Loading...</div>;
+  }
+
+  if (auth.isAuthenticated) {
+    if (auth.role === "driver") {
+      return <Navigate to="/driver" replace />;
+    } else if (auth.role === "maintainer") {
+      return <Navigate to="/maintainer" replace />;
+    }
   }
 
   return <>{children}</>; 
