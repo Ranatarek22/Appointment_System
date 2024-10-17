@@ -9,7 +9,69 @@
   box-sizing: border-box;
 }
 
-/* main {
+.services {
+  padding-block: 3rem;
+  padding: 10%;
   display: flex;
   flex-direction: column;
-} */
+  align-items: center;
+  gap: 4rem;
+}
+.services h1 {
+  font-weight: bold;
+  color: #000000;
+  text-align: center;
+}
+
+.services .cards {
+  display: flex;
+  /* padding: 0.5rem 0.9rem; */
+  align-items: stretch;
+  justify-content: center;
+  gap: 4rem;
+}
+@media (min-width: 1120px) {
+  .services .cards {
+    flex-direction: row;
+  }
+}
+/* flex justify-center items-center flex-col gap-10 py-10 px-16 bg-white rounded-[20px] shadow-lg */
+
+.services .card {
+  box-shadow: 0px 0px 36px -5px rgba(54, 145, 168, 0.26);
+  flex: 1;
+  padding: 1.5rem 0.8rem;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  -ms-border-radius: 20px;
+  -o-border-radius: 20px;
+}
+/* bg-[#A8C7A9] p-6 rounded-full */
+.services .card .image {
+  background-color: var(--second-color);
+  border-radius: 50%;
+  padding: 16px;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+}
+/* className="font-bold text-2xl" */
+.services .card h3 {
+  font-size: 31px;
+  font-weight: bold;
+  text-align: center;
+}
+
+/*  className="text-gray-600 font-medium text-center" */
+.services .card p {
+  color: gray;
+  font-weight: 500;
+  text-align: center;
+}
+/* Services */

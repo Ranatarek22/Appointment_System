@@ -7,7 +7,7 @@ import SignUpForm from "./components/forms/registerForm";
 import { Route, Routes } from "react-router-dom";
 import Layout from "./components/Layout";
 import RequireAuth from "./components/RequiredAuth";
-import Home from "./components/pages/Home";
+import Home from "./components/pages/HomePage/Home";
 import Driver from "./components/pages/Users/Driver";
 import Maintainer from "./components/pages/Users/Maintainer";
 import BlockRoutes from "./components/routes/blockRoutes";
@@ -50,9 +50,9 @@ function App() {
           path="/"
           index
           element={
-            <BlockRoutes>
-              <Home />
-            </BlockRoutes>
+            // <BlockRoutes>
+            <Home />
+            // </BlockRoutes>
           }
         />
 
