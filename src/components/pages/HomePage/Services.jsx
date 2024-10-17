@@ -113,9 +113,9 @@ export default function Services({ auth }) {
       className="container-fluid"
       style={{
         width: "100vw",
-        marginLeft: "calc((100% - 100vw) / 2)",
+        // marginLeft: "calc((100% - 100vw) / 2)",
         background: "white",
-        padding: "100px",
+        // padding: "100px",
         paddingTop: 0,
       }}
     >
