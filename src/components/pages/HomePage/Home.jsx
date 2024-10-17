@@ -19,7 +19,7 @@ const Home = () => {
   };
 
   return (
-    <div className="w-full">
+    <div className="flex flex-col justify-center">
       <Navbar />
       <motion.div
         initial={{ opacity: 0 }}
