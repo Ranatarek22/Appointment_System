@@ -11,12 +11,13 @@ import Button from "@mui/material/Button";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
 import useAuth from "../../hooks/useAuth";
-import Cookies from "js-cookie"; // Make sure to import js-cookie
+import logo from "../assets/rentty_logo.png";
+import Cookies from "js-cookie";
 
 const Navbar = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const theme = useTheme();
-  const { auth, setAuth } = useAuth(); // Get setAuth from useAuth
+  const { auth, setAuth } = useAuth();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const navigate = useNavigate();
 
@@ -29,15 +30,15 @@ const Navbar = () => {
   };
 
   const handleNavigate = (path) => {
-    navigate(path); // Navigate to the specified path
+    navigate(path);
     handleMenuClose();
   };
 
   const logout = async () => {
     Cookies.remove("accessToken");
     Cookies.remove("refreshToken");
-    setAuth({}); // Clear auth state
-    navigate("/"); // Navigate to home after logout
+    setAuth({});
+    navigate("/");
   };
 
   return (
@@ -48,7 +49,7 @@ const Navbar = () => {
     >
       <Toolbar>
         <Typography variant="h6" sx={{ flexGrow: 1 }}>
-          صيانه
+          <img src={logo} alt="ًصيانه" srcset={logo} />
         </Typography>
         {isMobile ? (
           <>
@@ -72,13 +73,13 @@ const Navbar = () => {
                       key="login"
                       onClick={() => handleNavigate("/login")}
                     >
-                      Login
+                      تسجيل
                     </MenuItem>,
                     <MenuItem
                       key="signup"
                       onClick={() => handleNavigate("/register")}
                     >
-                      Sign Up
+                      تسجيل الدخول
                     </MenuItem>,
                   ]
                 : [
@@ -90,10 +91,10 @@ const Navbar = () => {
                         )
                       }
                     >
-                      Profile
+                      الحساب
                     </MenuItem>,
                     <MenuItem key="logout" onClick={logout}>
-                      Logout
+                      تسجيل الخروج
                     </MenuItem>,
                   ]}
             </Menu>

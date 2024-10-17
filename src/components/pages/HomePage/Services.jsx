@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { apiInstance } from "../../../axios";
-import ServiceCard from "./ServiceCard"; // Ensure the path is correct
+import ServiceCard from "./ServiceCard";
 
 export default function Services() {
   const [maintainers, setMaintainers] = useState([]);

@@ -43,7 +43,7 @@ const Home = () => {
               variant="h1"
               className="mb-4 text-4xl md:text-6xl font-bold"
             >
-              أهلا بك في صيانه
+              أهلا بك في رينتى
             </Typography>
             <Typography variant="lead" className="mb-8 text-xl md:text-2xl">
               ابدا حجزك الان
