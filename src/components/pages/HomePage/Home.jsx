@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { Button, Typography } from "@mui/material";
 import Services from "./Services";
 import Navbar from "../../navigation/Navbar";
-
+import hero from "../../assets/motor.png";
 // import useRefreshToken from "../hooks/useRefreshToken";
 
 const Home = () => {
@@ -27,12 +27,12 @@ const Home = () => {
         transition={{ duration: 0.5 }}
         className="relative h-screen"
       >
-        {/* <img
-        src={assets.hero}
-        alt="Hero Background"
-        className="w-full h-full object-cover"
-      /> */}
-        <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+        <img
+          src={hero}
+          alt="Hero Background"
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 hover:bg-white bg-black hover:bg-opacity-10 bg-opacity-50 flex items-center justify-center">
           <motion.div
             initial={{ opacity: 0, y: -50 }}
             animate={{ opacity: 1, y: 0 }}
