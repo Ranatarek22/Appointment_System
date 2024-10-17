@@ -38,6 +38,16 @@ const Sidebar = ({ open, onClose }) => {
 
       <nav className="flex-grow mt-4">
         <ul>
+          <li className="flex items-center p-4 hover:bg-white hover:text-black transition duration-300 cursor-pointer">
+            <span
+              className="ml-3"
+              onClick={() => {
+                navigate("/");
+              }}
+            >
+              الرئيسيه
+            </span>
+          </li>
           {auth.role === "driver" && (
             <div>
               <li

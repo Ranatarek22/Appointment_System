@@ -123,10 +123,10 @@ const Navbar = () => {
                     )
                   }
                 >
-                  Profile
+                  الحساب
                 </Button>
                 <Button color="inherit" onClick={logout}>
-                  Logout
+                  تسجيل الخروج
                 </Button>
               </>
             )}
