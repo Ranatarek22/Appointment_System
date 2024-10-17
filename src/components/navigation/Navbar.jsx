@@ -66,7 +66,7 @@ const Navbar = () => {
               open={Boolean(anchorEl)}
               onClose={handleMenuClose}
             >
-              <MenuItem onClick={() => handleNavigate("/")}>Home</MenuItem>
+              <MenuItem onClick={() => handleNavigate("/")}>الرئيسيه</MenuItem>
               {!auth.isAuthenticated
                 ? [
                     <MenuItem
