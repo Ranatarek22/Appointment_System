@@ -14,10 +14,10 @@ import {
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import { apiInstance } from "../../../axios";
 import useAuth from "../../../hooks/useAuth";
-import { useTranslation } from "react-i18next"; // Import the useTranslation hook
+import { useTranslation } from "react-i18next"; 
 
 const AllMaintainers = () => {
-  const { t, i18n } = useTranslation(); // Use the hook
+  const { t, i18n } = useTranslation(); 
   const [maintainers, setMaintainers] = useState([]);
   const { auth } = useAuth();
   const [openModal, setOpenModal] = useState(false);
