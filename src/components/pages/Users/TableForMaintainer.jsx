@@ -11,6 +11,7 @@ import {
 } from "@mui/material";
 import { AppointmentContext } from "../../context/AppointmentProvider";
 import useAuth from "../../../hooks/useAuth";
+import { useTranslation } from "react-i18next";
 
 const style = {
   position: "absolute",
@@ -25,6 +26,7 @@ const style = {
 };
 
 const TableForMaintainer = () => {
+  const { t, i18n } = useTranslation(); // Use this hook to get translations
   const { appointments, addAppointment } = useContext(AppointmentContext);
   const [open, setOpen] = useState(false);
   const { auth } = useAuth();
@@ -70,7 +72,7 @@ const TableForMaintainer = () => {
         active: false,
       });
 
-      handleClose(); 
+      handleClose();
     } catch (error) {
       console.error("Error creating appointment:", error);
     }
@@ -87,12 +89,12 @@ const TableForMaintainer = () => {
         >
           <Box sx={style}>
             <Typography id="modal-title" variant="h6" component="h2">
-              اضف يوم الى جدولك
+              {t("addToSchedule")}
             </Typography>
 
             <form onSubmit={handleSubmit} style={{ marginTop: "20px" }}>
               <TextField
-                label="من "
+                label={t("startTime")}
                 name="from_time"
                 type="datetime-local"
                 fullWidth
@@ -106,7 +108,7 @@ const TableForMaintainer = () => {
               />
 
               <TextField
-                label="الى"
+                label={t("endTime")}
                 name="to_time"
                 type="datetime-local"
                 fullWidth
@@ -120,7 +122,7 @@ const TableForMaintainer = () => {
               />
 
               <TextField
-                label="Slots"
+                label={t("slots")}
                 name="slots"
                 type="number"
                 fullWidth
@@ -148,7 +150,7 @@ const TableForMaintainer = () => {
                 fullWidth
                 style={{ marginTop: "20px" }}
               >
-                اضف
+                {t("add")}
               </Button>
             </form>
           </Box>
@@ -156,7 +158,7 @@ const TableForMaintainer = () => {
       </div>
 
       <div className="max-w-4xl  w-[100%] shadow-lg rounded-lg border mt-[10%] border-gray-200 bg-white mx-auto p-4">
-        <h2 className="text-2xl font-bold mb-4">جدول المواعيد</h2>
+        <h2 className="text-2xl font-bold mb-4">{t("scheduleTitle")}</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {appointments.map((appointment, index) => (
             <motion.div
@@ -183,14 +185,17 @@ const TableForMaintainer = () => {
                   </svg>
                 </button>
                 <h3 className="text-xl font-semibold mt-1">
-                  {new Date(appointment.from_time).toLocaleString("ar-EG", {
-                    weekday: "long",
-                  })}
+                  {new Date(appointment.from_time).toLocaleString(
+                    i18n.language,
+                    {
+                      weekday: "long",
+                    }
+                  )}
                 </h3>
               </div>
               <div className="mt-2">
                 <p className="text-sm">
-                  <span className="font-semibold">التاريخ </span>
+                  <span className="font-semibold">{t("date")} </span>
                   {new Date(appointment.from_time).toLocaleDateString("ar-EG", {
                     year: "numeric",
                     month: "long",
@@ -198,7 +203,7 @@ const TableForMaintainer = () => {
                   })}
                 </p>
                 <p className="text-sm">
-                  <span className="font-semibold">بداية الفتره </span>
+                  <span className="font-semibold">{t("startTime")} </span>
                   {new Date(appointment.from_time).toLocaleTimeString([], {
                     hour: "2-digit",
                     minute: "2-digit",
@@ -206,7 +211,7 @@ const TableForMaintainer = () => {
                   })}
                 </p>
                 <p className="text-sm">
-                  <span className="font-semibold">نهاية الفتره </span>
+                  <span className="font-semibold">{t("endTime")} </span>
                   {new Date(appointment.to_time).toLocaleTimeString([], {
                     hour: "2-digit",
                     minute: "2-digit",
@@ -214,7 +219,7 @@ const TableForMaintainer = () => {
                   })}
                 </p>
                 <p className="text-sm">
-                  <span className="font-semibold">عدد الفترات </span>
+                  <span className="font-semibold">{t("slots")} </span>
                   {appointment.slots}
                 </p>
               </div>
@@ -229,7 +234,7 @@ const TableForMaintainer = () => {
             transition={{ duration: 0.2 }}
             onClick={handleOpen}
           >
-            <span className="mr-2">+</span> اضف يوم اخر
+            <span className="mr-2">+</span> {t("addDay")}
           </motion.button>
         </div>
       </div>

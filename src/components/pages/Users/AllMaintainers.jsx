@@ -11,11 +11,13 @@ import {
   DialogContent,
   DialogTitle,
 } from "@mui/material";
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import { apiInstance } from "../../../axios";
 import useAuth from "../../../hooks/useAuth";
-import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
+import { useTranslation } from "react-i18next"; // Import the useTranslation hook
+
 const AllMaintainers = () => {
+  const { t, i18n } = useTranslation(); // Use the hook
   const [maintainers, setMaintainers] = useState([]);
   const { auth } = useAuth();
   const [openModal, setOpenModal] = useState(false);
@@ -40,36 +42,6 @@ const AllMaintainers = () => {
     fetchMaintainers();
   }, [auth.accessToken]);
 
-  //   const reserveAppointment = async (appointmentId) => {
-  //     try {
-  //       const response = await apiInstance.post(
-  //         `/reservations/appointments/${appointmentId}/reserve/`,
-  //         {},
-  //         {
-  //           headers: {
-  //             Authorization: `Bearer ${auth.accessToken}`,
-  //           },
-  //         }
-  //       );
-  //       const updatedSlotsLeft = response.data.slots_left;
-  //       console.log(updatedSlotsLeft + " " + appointmentId);
-
-  //       setMaintainers((prevMaintainers) =>
-  //         prevMaintainers.map((maintainer) => ({
-  //           ...maintainer,
-  //           appointments: maintainer.appointments.map((appointment) =>
-  //             appointment.id === appointmentId
-  //               ? { ...appointment, slots_left: updatedSlotsLeft }
-  //               : appointment
-  //           ),
-  //         }))
-  //       );
-  //       setOpenModal(true);
-  //     } catch (error) {
-  //       console.error("Error reserving appointment:", error);
-  //       alert("Error reserving the appointment. Please try again.");
-  //     }
-  //   };
   const reserveAppointment = async (appointmentId) => {
     try {
       const response = await apiInstance.post(
@@ -81,8 +53,6 @@ const AllMaintainers = () => {
           },
         }
       );
-      console.log("Response from server:", response.data);
-
       const updatedSlotsLeft = response.data.slots_left;
       setMaintainers((prevMaintainers) =>
         prevMaintainers.map((maintainer) => ({
@@ -97,7 +67,7 @@ const AllMaintainers = () => {
       setOpenModal(true);
     } catch (error) {
       console.error("Error reserving appointment:", error);
-      alert("Error reserving the appointment. Please try again.");
+      alert(t("error_reserving_appointment"));
     }
   };
 
@@ -108,7 +78,7 @@ const AllMaintainers = () => {
   return (
     <div className="flex flex-col gap-4 px-4 py-6">
       {maintainers.length === 0 ? (
-        <p>لا يوجد شركه متاحه</p>
+        <p>{t("no_company_available")}</p>
       ) : (
         maintainers.map((maintainer) => (
           <Card key={maintainer.id} className="w-[80%] mx-auto p-4">
@@ -138,30 +108,30 @@ const AllMaintainers = () => {
                               <div>
                                 {new Date(
                                   appointment.from_time
-                                ).toLocaleDateString("ar-EG", {
+                                ).toLocaleDateString(i18n.language, {
                                   weekday: "long",
                                   year: "numeric",
                                   month: "long",
                                   day: "numeric",
                                 })}
                               </div>
-                              <strong>من </strong>
+                              <strong>{t("from")}</strong>
                               <div>
                                 {new Date(
                                   appointment.from_time
-                                ).toLocaleTimeString("ar-EG")}
+                                ).toLocaleTimeString(i18n.language)}
                               </div>
                             </Typography>
                             <Typography variant="body2">
-                              <strong>الى </strong>
+                              <strong>{t("to")}</strong>
                               <div>
                                 {new Date(
                                   appointment.to_time
-                                ).toLocaleTimeString("ar-EG")}
+                                ).toLocaleTimeString(i18n.language)}
                               </div>
                             </Typography>
                             <Typography variant="body2">
-                              <strong>عدد الاماكن المتاحه</strong>{" "}
+                              <strong>{t("available_slots")}</strong>{" "}
                               {appointment.slots}
                             </Typography>
                             <Divider className="my-2" />
@@ -172,7 +142,7 @@ const AllMaintainers = () => {
                               disabled={!appointment.active}
                               className="md:w-full"
                             >
-                              احجز
+                              {t("reserve")}
                             </Button>
                           </CardContent>
                         </Card>
@@ -181,7 +151,7 @@ const AllMaintainers = () => {
                 </div>
               ) : (
                 <Typography variant="body2" color="textSecondary">
-                  لا توجد مواعيد متاحه
+                  {t("no_appointments_available")}
                 </Typography>
               )}
             </CardContent>
@@ -190,14 +160,14 @@ const AllMaintainers = () => {
       )}
 
       <Dialog open={openModal} onClose={handleCloseModal}>
-        <DialogTitle>نجح الحجز</DialogTitle>
+        <DialogTitle>{t("reservation_successful")}</DialogTitle>
         <DialogContent className="flex flex-col items-center">
           <CheckCircleOutlineIcon style={{ fontSize: 50, color: "green" }} />
-          <Typography>"لقد قمت بحجز مكان في الموعد بنجاح!"</Typography>
+          <Typography>{t("reservation_success_message")}</Typography>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCloseModal} color="primary">
-            إغلاق
+            {t("close")}
           </Button>
         </DialogActions>
       </Dialog>

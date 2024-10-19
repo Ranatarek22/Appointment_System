@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"; 
+import React, { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
@@ -13,11 +13,17 @@ import { useTheme } from "@mui/material/styles";
 import useAuth from "../../hooks/useAuth";
 import logo from "../assets/rentty_logo.png";
 import Cookies from "js-cookie";
+import { LanguageContext } from "../context/LanguageProvider";
+import { useTranslation } from "react-i18next";
 
 const Navbar = () => {
   const [anchorEl, setAnchorEl] = useState(null);
+  const { language, toggleLanguage } = useContext(LanguageContext);
+  const { t } = useTranslation();
+
   const theme = useTheme();
   const { auth, setAuth } = useAuth();
+
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const navigate = useNavigate();
 
@@ -66,20 +72,28 @@ const Navbar = () => {
               open={Boolean(anchorEl)}
               onClose={handleMenuClose}
             >
-              <MenuItem onClick={() => handleNavigate("/")}>الرئيسيه</MenuItem>
+              <MenuItem onClick={() => handleNavigate("/")}>
+                {t("home")}
+              </MenuItem>
               {!auth.isAuthenticated
                 ? [
                     <MenuItem
                       key="login"
-                      onClick={() => handleNavigate("/login")}
+                      onClick={() => handleNavigate("/register")}
                     >
-                      تسجيل
+                      {t("register")}
                     </MenuItem>,
                     <MenuItem
                       key="signup"
-                      onClick={() => handleNavigate("/register")}
+                      onClick={() => handleNavigate("/login")}
                     >
-                      تسجيل الدخول
+                      {t("login_title")}
+                    </MenuItem>,
+
+                    <MenuItem onClick={toggleLanguage}>
+                      {language === "en"
+                        ? "Switch to Arabic"
+                        : "التبديل إلى الإنجليزية"}
                     </MenuItem>,
                   ]
                 : [
@@ -96,21 +110,31 @@ const Navbar = () => {
                     <MenuItem key="logout" onClick={logout}>
                       تسجيل الخروج
                     </MenuItem>,
+                    <MenuItem onClick={toggleLanguage}>
+                      {language === "en"
+                        ? "Switch to Arabic"
+                        : "التبديل إلى الإنجليزية"}
+                    </MenuItem>,
                   ]}
             </Menu>
           </>
         ) : (
           <>
             <Button color="inherit" onClick={() => navigate("/")}>
-              الرئيسيه
+              {t("home")}
+            </Button>
+            <Button onClick={toggleLanguage} className="bg-red">
+              {language === "en"
+                ? "Switch to Arabic"
+                : "التبديل إلى الإنجليزية"}
             </Button>
             {!auth.isAuthenticated && (
               <>
                 <Button color="inherit" onClick={() => navigate("/login")}>
-                  تسجيل الخول
+                  {t("login_title")}
                 </Button>
                 <Button color="inherit" onClick={() => navigate("/register")}>
-                  تسجيل
+                  {t("register")}
                 </Button>
               </>
             )}
@@ -139,3 +163,28 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+// Navbar.js
+// import React, { useContext } from "react";
+// import { LanguageContext } from "../context/LanguageProvider";
+// import { useTranslation } from "react-i18next";
+// import { AppBar, Toolbar, Button } from "@mui/material";
+
+// const Navbar = () => {
+//   const { language, toggleLanguage } = useContext(LanguageContext);
+//   const { t } = useTranslation();
+
+//   return (
+//     <AppBar position="static" className="bg-white">
+//       <Toolbar>
+//         <Button onClick={toggleLanguage}>
+//           {language === "en" ? "Switch to Arabic" : "التبديل إلى الإنجليزية"}
+//         </Button>
+//         <Button color="inherit">{t("home")}</Button>
+//         {/* Add more buttons for login, register, etc. */}
+//       </Toolbar>
+//     </AppBar>
+//   );
+// };
+
+// export default Navbar;

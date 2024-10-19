@@ -6,12 +6,14 @@ import { Button, Typography } from "@mui/material";
 import Services from "./Services";
 import Navbar from "../../navigation/Navbar";
 import hero from "../../assets/motor.png";
+import { useTranslation } from "react-i18next";
 // import useRefreshToken from "../hooks/useRefreshToken";
 
 const Home = () => {
   const { auth, setAuth } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
+  const { t } = useTranslation();
   // const refresh = useRefreshToken();
   const logout = async () => {
     setAuth({});
@@ -43,10 +45,10 @@ const Home = () => {
               variant="h1"
               className="mb-4 text-4xl md:text-6xl font-bold"
             >
-              أهلا بك في رينتى
+              {t("welcome")}
             </Typography>
             <Typography variant="lead" className="mb-8 text-xl md:text-2xl">
-              ابدا حجزك الان
+              {t("book_now")}
             </Typography>
             {/* <div className="flex justify-center gap-4">
               <Button size="lg" color="white" className="hover:bg-blue-500">

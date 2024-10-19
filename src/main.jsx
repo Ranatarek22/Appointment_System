@@ -16,15 +16,21 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./index.css";
 import { AppointmentProvider } from "./components/context/AppointmentProvider.jsx";
 
+import "./i18n";
+import LanguageProvider from "./components/context/LanguageProvider.jsx";
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <AuthProvider>
       <AppointmentProvider>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/*" element={<App />} />
-          </Routes>
-        </BrowserRouter>
+       <LanguageProvider>
+          {/* <I18nextProvider i18n={i18n}> */}
+            <BrowserRouter>
+              <Routes>
+                <Route path="/*" element={<App />} />
+              </Routes>
+            </BrowserRouter>
+          {/* </I18nextProvider> */}
+      </LanguageProvider>
       </AppointmentProvider>
     </AuthProvider>
   </StrictMode>

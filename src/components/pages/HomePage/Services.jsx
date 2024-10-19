@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { apiInstance } from "../../../axios";
 import ServiceCard from "./ServiceCard";
+import { useTranslation } from "react-i18next";
 
 export default function Services() {
   const [maintainers, setMaintainers] = useState([]);
+  const { t } = useTranslation();
 
   useEffect(() => {
     const fetchMaintainers = async () => {
@@ -38,14 +40,14 @@ export default function Services() {
             color: "var(--new-color)",
           }}
         >
-          شركات الصيانه
+          {t("company_mant")}
         </h3>
         <div className="cards flex-col md:flex-row w-full">
           {maintainers.map((maintainer, index) => (
             <ServiceCard
               key={maintainer.id}
               title={maintainer.name}
-              description="أبدأ رحلتك واحجز معنا الان"
+              description={t("company_description")}
             />
           ))}
         </div>

@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import LoginForm from "./components/forms/loginForm";
+import Login from "./components/pages/Auth/Login";
 import Missing from "./components/Missing";
 import Unauthorized from "./components/Unautharized";
 import LinkPage from "./components/LinkPage";
-import SignUpForm from "./components/forms/registerForm";
+import Register from "./components/pages/Auth/Register";
 import { Route, Routes } from "react-router-dom";
 import Layout from "./components/Layout";
 import RequireAuth from "./components/RequiredAuth";
@@ -17,10 +17,21 @@ import { AppointmentProvider } from "./components/context/AppointmentProvider";
 import Appointments from "./components/pages/Appointments/AppointmentsDriverTable";
 import DriverAppointments from "./components/pages/Appointments/DriverAppointments";
 import MaintainerAppointments from "./components/pages/Appointments/MaintainerAppointments";
+import { useTranslation } from "react-i18next";
 
 function App() {
   const { auth, setAuth } = useAuth();
   const refresh = useRefreshToken();
+    const { i18n } = useTranslation();
+
+    useEffect(() => {
+      const currentLang = i18n.language;
+      const direction = currentLang === "ar" ? "rtl" : "ltr";
+
+      document.documentElement.lang = currentLang;
+      document.documentElement.dir = direction;
+    }, [i18n.language]);
+
 
   return (
     // <Appointments />
@@ -32,7 +43,7 @@ function App() {
           path="login"
           element={
             <BlockRoutes>
-              <LoginForm />
+              <Login />
             </BlockRoutes>
           }
         />
@@ -40,7 +51,7 @@ function App() {
           path="register"
           element={
             <BlockRoutes>
-              <SignUpForm />
+              <Register />
             </BlockRoutes>
           }
         />

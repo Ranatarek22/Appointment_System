@@ -13,28 +13,28 @@ import {
 } from "@mui/material";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { object, string } from "yup";
+import { object } from "yup";
 import { apiInstance } from "../../axios";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
-const SignUpForm = () => {
+const RegisterForm = () => {
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
+  const { t } = useTranslation();
   const navigate = useNavigate();
+
   const signupschema = object().shape({
-    username: Yup.string().required("Username is required"),
-    email: Yup.string()
-      .email("Invalid email format")
-      .required("Email is required"),
+    username: Yup.string().required(t("username_required")),
+    email: Yup.string().email(t("email_invalid")).required(t("email_required")),
     password: Yup.string()
-      .required("Password is required")
-      .min(8, "Password must be at least 8 characters"),
+      .required(t("password_required"))
+      .min(8, t("password_min")),
     confirm_password: Yup.string()
-      .required("Confirm password is required")
-      .oneOf([Yup.ref("password"), null], "Passwords must match"),
-    company: Yup.string().required("Company name is required"),
-    role: Yup.string().required("Role is required"),
+      .required(t("confirm_password_required"))
+      .oneOf([Yup.ref("password"), null], t("passwords_must_match")),
+    company: Yup.string().required(t("company_required")),
+    role: Yup.string().required(t("role_required")),
   });
 
   const formik = useFormik({
@@ -57,24 +57,13 @@ const SignUpForm = () => {
         });
 
         console.log("Response:", response);
-        setSnackbarMessage("Registration successful!");
+        setSnackbarMessage(t("registration_success"));
         setOpenSnackbar(true);
         navigate("/login");
         formik.resetForm();
       } catch (error) {
         console.error("Error during registration:", error);
-        console.error("Status Code:", error.response.status);
-        if (error.response) {
-          console.error("Status Code:", error.response.status);
-          console.error("Data:", error.response.data);
-          console.error("Headers:", error.response.headers);
-        } else if (error.request) {
-          console.error("Request:", error.request);
-        } else {
-          console.error("Message:", error.message);
-        }
-
-        setSnackbarMessage("Registration failed. Please try again.");
+        setSnackbarMessage(t("registration_failed"));
         setOpenSnackbar(true);
       }
     },
@@ -83,13 +72,13 @@ const SignUpForm = () => {
   return (
     <Container maxWidth="sm" sx={{ marginTop: 4 }}>
       <Typography variant="h4" component="h1" gutterBottom>
-        التسجيل
+        {t("sign_up_title")}
       </Typography>
       <form onSubmit={formik.handleSubmit} style={{ direction: "rtl" }}>
         <TextField
           fullWidth
           margin="normal"
-          label="اسم المستخدم"
+          label={t("username_label")}
           name="username"
           value={formik.values.username}
           onChange={formik.handleChange}
@@ -99,7 +88,7 @@ const SignUpForm = () => {
         <TextField
           fullWidth
           margin="normal"
-          label="الحساب"
+          label={t("email_label")}
           name="email"
           type="email"
           value={formik.values.email}
@@ -110,7 +99,7 @@ const SignUpForm = () => {
         <TextField
           fullWidth
           margin="normal"
-          label="كلمة المرور"
+          label={t("password_label")}
           name="password"
           type="password"
           value={formik.values.password}
@@ -121,7 +110,7 @@ const SignUpForm = () => {
         <TextField
           fullWidth
           margin="normal"
-          label="تأكيد كلمة المرور"
+          label={t("confirm_password_label")}
           name="confirm_password"
           type="password"
           value={formik.values.confirm_password}
@@ -137,7 +126,7 @@ const SignUpForm = () => {
         <TextField
           fullWidth
           margin="normal"
-          label="اسم الشركه"
+          label={t("company_label")}
           name="company"
           value={formik.values.company}
           onChange={formik.handleChange}
@@ -148,7 +137,7 @@ const SignUpForm = () => {
           margin="normal"
           error={formik.touched.role && Boolean(formik.errors.role)}
         >
-          <FormLabel>من انت ؟</FormLabel>
+          <FormLabel>{t("role_label")}</FormLabel>
           <RadioGroup
             name="role"
             value={formik.values.role || ""}
@@ -157,9 +146,13 @@ const SignUpForm = () => {
             <FormControlLabel
               value="maintainer"
               control={<Radio />}
-              label="مسؤول الصيانه"
+              label={t("maintainer_label")}
             />
-            <FormControlLabel value="driver" control={<Radio />} label="سائق" />
+            <FormControlLabel
+              value="driver"
+              control={<Radio />}
+              label={t("driver_label")}
+            />
           </RadioGroup>
           {formik.touched.role && formik.errors.role && (
             <Typography variant="caption" color="error">
@@ -174,7 +167,7 @@ const SignUpForm = () => {
           type="submit"
           sx={{ marginTop: 2 }}
         >
-          تسجيل
+          {t("register_button")}
         </Button>
       </form>
       <Snackbar
@@ -187,4 +180,4 @@ const SignUpForm = () => {
   );
 };
 
-export default SignUpForm;
+export default RegisterForm;

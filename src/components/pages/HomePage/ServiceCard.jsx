@@ -3,10 +3,12 @@ import { Tilt } from "react-tilt";
 import { Button } from "@mui/material";
 import useAuth from "../../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const ServiceCard = ({ title, description }) => {
   const { auth } = useAuth();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const navigateToAppoint = () => {
     if (auth.isAuthenticated) {
@@ -30,7 +32,7 @@ const ServiceCard = ({ title, description }) => {
         <p>{description}</p>
         {(!auth.isAuthenticated ||
           (auth.isAuthenticated && auth.role === "driver")) && (
-          <Button onClick={navigateToAppoint}>احجز</Button>
+          <Button onClick={navigateToAppoint}>{t("book")}</Button>
         )}
       </div>
     </Tilt>

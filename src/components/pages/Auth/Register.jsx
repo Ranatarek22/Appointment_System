@@ -1,7 +1,14 @@
 import React from "react";
+import Navbar from "../../navigation/Navbar";
+import RegisterForm from "../../forms/registerForm";
 
-const register = () => {
-  return <div>Register</div>;
+const Register = () => {
+  return (
+    <div className="flex flex-col">
+      <Navbar />
+      <RegisterForm />
+    </div>
+  );
 };
 
-export default register;
+export default Register;

@@ -1,14 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
 import prof from "../assets/user6.png";
 import useAuth from "../../hooks/useAuth";
 import CloseIcon from "@mui/icons-material/Close";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import { Avatar } from "@mui/material";
+import { LanguageContext } from "../context/LanguageProvider";
+import { useTranslation } from "react-i18next";
 
 const Sidebar = ({ open, onClose }) => {
   const { auth, setAuth } = useAuth();
   const navigate = useNavigate();
+  const { language, toggleLanguage } = useContext(LanguageContext);
+  const { t } = useTranslation();
   const logout = async () => {
     Cookies.remove("accessToken");
     Cookies.remove("refreshToken");
@@ -45,7 +49,7 @@ const Sidebar = ({ open, onClose }) => {
                 navigate("/");
               }}
             >
-              الرئيسيه
+              {t("home")}
             </span>
           </li>
           {auth.role === "driver" && (
@@ -56,7 +60,7 @@ const Sidebar = ({ open, onClose }) => {
                   navigate("/drivappoint");
                 }}
               >
-                <span className="ml-3">المواعيد</span>
+                <span className="ml-3">{t("appointment")}</span>
               </li>
               <li
                 className="flex items-center p-4 hover:bg-white hover:text-black transition duration-300 cursor-pointer"
@@ -64,7 +68,7 @@ const Sidebar = ({ open, onClose }) => {
                   navigate("/driver");
                 }}
               >
-                <span className="ml-3">شركات الصيانه</span>
+                <span className="ml-3">{t("company")}</span>
               </li>
             </div>
           )}
@@ -76,7 +80,7 @@ const Sidebar = ({ open, onClose }) => {
                   navigate("/maintappoint");
                 }}
               >
-                <span className="ml-3">المواعيد</span>
+                <span className="ml-3">{t("appointment")}</span>
               </li>
               <li
                 className="flex items-center p-4 hover:bg-white hover:text-black transition duration-300 cursor-pointer"
@@ -84,16 +88,23 @@ const Sidebar = ({ open, onClose }) => {
                   navigate("/maintainer");
                 }}
               >
-                <span className="ml-3">جدول المواعيد</span>
+                <span className="ml-3">{t("schedule")}</span>
               </li>
             </div>
           )}
           <li className="flex items-center p-4 hover:bg-white hover:text-black transition duration-300 cursor-pointer">
-            <span className="ml-3">الملف الشخصي</span>
+            <span className="ml-3">{t("profile")}</span>
           </li>
           <li className="flex items-center p-4 hover:bg-white hover:text-black transition duration-300 cursor-pointer">
             <span className="ml-3" onClick={logout}>
-              تسجيل الخروج
+              {t("log_out")}
+            </span>
+          </li>
+          <li className="flex items-center p-4 hover:bg-white hover:text-black transition duration-300 cursor-pointer">
+            <span className="ml-3" onClick={toggleLanguage}>
+              {language === "en"
+                ? "Switch to Arabic"
+                : "التبديل إلى الإنجليزية"}
             </span>
           </li>
         </ul>

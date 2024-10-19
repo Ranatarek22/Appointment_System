@@ -7,14 +7,14 @@ import {
   TableHead,
   TableRow,
   Paper,
-  Avatar,
   Button,
 } from "@mui/material";
-import axios from "axios";
+import { useTranslation } from "react-i18next"; 
 import useAuth from "../../../hooks/useAuth";
 import { apiInstance } from "../../../axios";
 
 const AppointmentsMaintainerTable = () => {
+  const { t, i18n } = useTranslation();
   const [appointments, setAppointments] = useState([]);
   const { auth } = useAuth();
 
@@ -37,51 +37,59 @@ const AppointmentsMaintainerTable = () => {
     };
 
     fetchAppointments();
-  }, []);
+  }, [auth.accessToken]);
+
+  const direction = i18n.language === "ar" ? "rtl" : "ltr";
+  const textAlign = i18n.language === "ar" ? "right" : "left";
 
   return (
     <TableContainer
       component={Paper}
-      className=" mt-[5%]"
-      style={{ direction: "rtl" }}
+      className="mt-[5%]"
+      style={{ direction: direction }}
     >
       <Table>
         <TableHead>
           <TableRow>
-            <TableCell style={{ textAlign: "right" }}>الرقم</TableCell>
-            <TableCell style={{ textAlign: "right" }}>اسم العميل</TableCell>
-            <TableCell style={{ textAlign: "right" }}>حساب العميل</TableCell>
-            <TableCell style={{ textAlign: "right" }}>من</TableCell>
-            <TableCell style={{ textAlign: "right" }}>الى</TableCell>
-            <TableCell style={{ textAlign: "right" }}>الحالة</TableCell>
-            {/* <TableCell style={{ textAlign: "right" }}>الإجراءات</TableCell> */}
+            <TableCell style={{ textAlign: textAlign }}>{t("id")}</TableCell>
+            <TableCell style={{ textAlign: textAlign }}>
+              {t("client_name")}
+            </TableCell>
+            <TableCell style={{ textAlign: textAlign }}>
+              {t("client_account")}
+            </TableCell>
+            <TableCell style={{ textAlign: textAlign }}>{t("from")}</TableCell>
+            <TableCell style={{ textAlign: textAlign }}>{t("to")}</TableCell>
+            <TableCell style={{ textAlign: textAlign }}>
+              {t("status")}
+            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {appointments.map((appointment) => (
             <TableRow key={appointment.id}>
-              <TableCell style={{ textAlign: "right" }}>
+              <TableCell style={{ textAlign: textAlign }}>
                 {appointment.id}
               </TableCell>
-              <TableCell style={{ textAlign: "right" }}>
+              <TableCell style={{ textAlign: textAlign }}>
                 {appointment.user.username}
               </TableCell>
-              <TableCell style={{ textAlign: "right" }}>
+              <TableCell style={{ textAlign: textAlign }}>
                 {appointment.user.email}
               </TableCell>
-              <TableCell style={{ textAlign: "right" }}>
+              <TableCell style={{ textAlign: textAlign }}>
                 {new Date(appointment.appointment.from_time).toLocaleString(
-                  "ar-EG",
+                  i18n.language === "ar" ? "ar-EG" : "en-US",
                   { hour12: true }
                 )}
               </TableCell>
-              <TableCell style={{ textAlign: "right" }}>
+              <TableCell style={{ textAlign: textAlign }}>
                 {new Date(appointment.appointment.to_time).toLocaleString(
-                  "ar-EG",
+                  i18n.language === "ar" ? "ar-EG" : "en-US",
                   { hour12: true }
                 )}
               </TableCell>
-              <TableCell style={{ textAlign: "right" }}>
+              <TableCell style={{ textAlign: textAlign }}>
                 <Button
                   variant="contained"
                   color={
@@ -89,12 +97,11 @@ const AppointmentsMaintainerTable = () => {
                   }
                   size="small"
                 >
-                  {appointment.appointment.fulfilled ? "مكتملة" : "غير مكتملة"}
+                  {appointment.appointment.fulfilled
+                    ? t("completed")
+                    : t("not_completed")}
                 </Button>
               </TableCell>
-              {/* <TableCell style={{ textAlign: "right" }}>
-                <Button variant="outlined">تفاصيل</Button>
-              </TableCell> */}
             </TableRow>
           ))}
         </TableBody>
