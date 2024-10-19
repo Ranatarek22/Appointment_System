@@ -7,11 +7,12 @@ import { useNavigate } from "react-router-dom";
 import { Avatar } from "@mui/material";
 import { LanguageContext } from "../context/LanguageProvider";
 import { useTranslation } from "react-i18next";
+import useLanguage from "../../hooks/useLanguage";
 
 const Sidebar = ({ open, onClose }) => {
   const { auth, setAuth } = useAuth();
   const navigate = useNavigate();
-  const { language, toggleLanguage } = useContext(LanguageContext);
+  const { language, toggleLanguage } = useLanguage();
   const { t } = useTranslation();
   const logout = async () => {
     Cookies.remove("accessToken");

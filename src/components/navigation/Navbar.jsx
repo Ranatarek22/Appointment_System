@@ -123,11 +123,7 @@ const Navbar = () => {
             <Button color="inherit" onClick={() => navigate("/")}>
               {t("home")}
             </Button>
-            <Button onClick={toggleLanguage} className="bg-red">
-              {language === "en"
-                ? "Switch to Arabic"
-                : "التبديل إلى الإنجليزية"}
-            </Button>
+
             {!auth.isAuthenticated && (
               <>
                 <Button color="inherit" onClick={() => navigate("/login")}>
@@ -148,13 +144,18 @@ const Navbar = () => {
                     )
                   }
                 >
-                  الحساب
+                  {t("profile")}
                 </Button>
                 <Button color="inherit" onClick={logout}>
-                  تسجيل الخروج
+                  {t("log_out")}
                 </Button>
               </>
             )}
+            <div className="mx-3">
+              <Button onClick={toggleLanguage} className="bg-red">
+                {language === "en" ? " Arabic" : "الإنجليزية"}
+              </Button>
+            </div>
           </>
         )}
       </Toolbar>
@@ -163,28 +164,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-
-// Navbar.js
-// import React, { useContext } from "react";
-// import { LanguageContext } from "../context/LanguageProvider";
-// import { useTranslation } from "react-i18next";
-// import { AppBar, Toolbar, Button } from "@mui/material";
-
-// const Navbar = () => {
-//   const { language, toggleLanguage } = useContext(LanguageContext);
-//   const { t } = useTranslation();
-
-//   return (
-//     <AppBar position="static" className="bg-white">
-//       <Toolbar>
-//         <Button onClick={toggleLanguage}>
-//           {language === "en" ? "Switch to Arabic" : "التبديل إلى الإنجليزية"}
-//         </Button>
-//         <Button color="inherit">{t("home")}</Button>
-//         {/* Add more buttons for login, register, etc. */}
-//       </Toolbar>
-//     </AppBar>
-//   );
-// };
-
-// export default Navbar;
