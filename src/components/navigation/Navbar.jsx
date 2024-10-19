@@ -105,15 +105,13 @@ const Navbar = () => {
                         )
                       }
                     >
-                      الحساب
+                      {t("profile")}
                     </MenuItem>,
                     <MenuItem key="logout" onClick={logout}>
-                      تسجيل الخروج
+                      {t("log_out")}
                     </MenuItem>,
                     <MenuItem onClick={toggleLanguage}>
-                      {language === "en"
-                        ? "Switch to Arabic"
-                        : "التبديل إلى الإنجليزية"}
+                      {language === "en" ? "Arabic" : " الإنجليزية"}
                     </MenuItem>,
                   ]}
             </Menu>
