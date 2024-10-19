@@ -95,7 +95,7 @@ const AllMaintainers = () => {
               <Divider className="my-2" />
               {maintainer.appointments.length > 0 ? (
                 <div className="flex gap-4 overflow-x-scroll w-full">
-                  <div className="flex flex-nowrap gap-4">
+                  <div className="flex flex-nowrap gap-4 ">
                     {maintainer.appointments
                       .filter((appointment) => appointment.slots > 0)
                       .map((appointment) => (
@@ -134,16 +134,20 @@ const AllMaintainers = () => {
                               <strong>{t("available_slots")}</strong>{" "}
                               {appointment.slots}
                             </Typography>
-                            <Divider className="my-2" />
-                            <Button
-                              variant="contained"
-                              color="primary"
-                              onClick={() => reserveAppointment(appointment.id)}
-                              disabled={!appointment.active}
-                              className="md:w-full"
-                            >
-                              {t("reserve")}
-                            </Button>
+                            <Divider className="my-2 " />
+                            <div className="mt-[10%]">
+                              <Button
+                                variant="contained"
+                                color="primary"
+                                onClick={() =>
+                                  reserveAppointment(appointment.id)
+                                }
+                                disabled={!appointment.active}
+                                className="md:w-full "
+                              >
+                                {t("reserve")}
+                              </Button>
+                            </div>
                           </CardContent>
                         </Card>
                       ))}

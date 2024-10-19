@@ -193,14 +193,17 @@ const TableForMaintainer = () => {
                   )}
                 </h3>
               </div>
-              <div className="mt-2">
+              <div className="mt-2 ">
                 <p className="text-sm">
                   <span className="font-semibold">{t("date")} </span>
-                  {new Date(appointment.from_time).toLocaleDateString(  i18n.language, {
-                    year: "numeric",
-                    month: "long",
-                    day: "numeric",
-                  })}
+                  {new Date(appointment.from_time).toLocaleDateString(
+                    i18n.language,
+                    {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    }
+                  )}
                 </p>
                 <p className="text-sm">
                   <span className="font-semibold">{t("startTime")} </span>
