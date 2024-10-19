@@ -33,11 +33,6 @@ const Sidebar = ({ open, onClose }) => {
 
       <div className="flex flex-col items-center p-4">
         <Avatar src={`https://avatars.dicebear.com/api/personas/`} alt="lol" />
-        {/* <img
-          src={prof}
-          alt="Profile"
-          className="w-24 h-24 rounded-full border-2 border-white"
-        /> */}
         <h2 className="mt-2 text-lg font-bold">{auth?.username}</h2>
       </div>
 
@@ -97,19 +92,19 @@ const Sidebar = ({ open, onClose }) => {
             <span className="ml-3">{t("profile")}</span>
           </li>
           <li className="flex items-center p-4 hover:bg-white hover:text-black transition duration-300 cursor-pointer">
-            <span className="ml-3" onClick={logout}>
-              {t("log_out")}
-            </span>
-          </li>
-          <li className="flex items-center p-4 hover:bg-white hover:text-black transition duration-300 cursor-pointer">
             <span className="ml-3" onClick={toggleLanguage}>
-              {language === "en"
-                ? "Switch to Arabic"
-                : "التبديل إلى الإنجليزية"}
+              {language === "en" ? "Arabic" : "الإنجليزية"}
             </span>
           </li>
         </ul>
       </nav>
+      <div className="p-4 ">
+        <li className="flex items-center p-4 text-red-500 hover:bg-red-500 hover:text-white transition duration-300 cursor-pointer">
+          <span className="ml-3" onClick={logout}>
+            {t("log_out")}
+          </span>
+        </li>
+      </div>
     </div>
   );
 };
