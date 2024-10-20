@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import prof from "../assets/user6.png";
+import prof from "../assets/user6.jpg";
 import useAuth from "../../hooks/useAuth";
 import CloseIcon from "@mui/icons-material/Close";
 import Cookies from "js-cookie";
