@@ -20,7 +20,6 @@
   "appointment": "المواعيد",
   "sign_up_title": "التسجيل",
   "username_label": "اسم المستخدم",
-
   "confirm_password_label": "تأكيد كلمة المرور",
   "company_label": "اسم الشركة",
   "role_label": "من أنت؟",
@@ -30,9 +29,7 @@
   "registration_success": "تم التسجيل بنجاح!",
   "registration_failed": "فشل التسجيل. يرجى المحاولة مرة أخرى.",
   "username_required": "اسم المستخدم مطلوب",
-
   "email_invalid": "تنسيق البريد الإلكتروني غير صالح",
-
   "confirm_password_required": "تأكيد كلمة المرور مطلوب",
   "passwords_must_match": "يجب أن تتطابق كلمات المرور",
   "company_required": "اسم الشركة مطلوب",
@@ -49,17 +46,14 @@
   "slots": "عدد الاماكن",
   "add": "اضف",
   "addToSchedule": "اضف يوم الى جدولك",
-
   "no_company_available": "لا يوجد شركه متاحه",
   "error_reserving_appointment": "خطأ في حجز الموعد. يرجى المحاولة مرة أخرى.",
-
   "available_slots": "عدد الاماكن المتاحه",
   "reserve": "احجز",
   "no_appointments_available": "لا توجد مواعيد متاحه",
   "reservation_successful": "نجح الحجز",
   "reservation_success_message": "لقد قمت بحجز مكان في الموعد بنجاح!",
   "close": "إغلاق",
-
   "id": "الرقم",
   "client_name": "اسم العميل",
   "client_account": "حساب العميل",

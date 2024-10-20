@@ -91,9 +91,7 @@ const Navbar = () => {
                     </MenuItem>,
 
                     <MenuItem onClick={toggleLanguage}>
-                      {language === "en"
-                        ? "Switch to Arabic"
-                        : "التبديل إلى الإنجليزية"}
+                      {language === "en" ? "Arabic" : " الإنجليزية"}
                     </MenuItem>,
                   ]
                 : [

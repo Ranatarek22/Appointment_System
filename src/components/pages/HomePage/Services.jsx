@@ -34,9 +34,10 @@ export default function Services() {
         <h3
           className="mb-5"
           style={{
-            fontSize: "4rem",
+            fontSize: "2rem",
             fontWeight: "40px",
             letterSpacing: "-2px",
+            textAlign:'center',
             color: "var(--new-color)",
           }}
         >

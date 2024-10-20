@@ -43,7 +43,8 @@ const Home = () => {
           >
             <Typography
               variant="h1"
-              className="mb-4 text-4xl md:text-6xl font-bold"
+              className="mb-4 text-3xl md:text-4xl font-bold"
+              style={{fontSize:"4rem"}}
             >
               {t("welcome")}
             </Typography>

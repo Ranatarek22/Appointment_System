@@ -20,7 +20,6 @@
   "appointment": "Appointments",
   "sign_up_title": "Sign Up",
   "username_label": "Username",
-
   "confirm_password_label": "Confirm Password",
   "company_label": "Company Name",
   "role_label": "Who are you?",
@@ -30,9 +29,7 @@
   "registration_success": "Registration successful!",
   "registration_failed": "Registration failed. Please try again.",
   "username_required": "Username is required",
-
   "email_invalid": "Invalid email format",
-
   "confirm_password_required": "Confirm password is required",
   "passwords_must_match": "Passwords must match",
   "company_required": "Company name is required",
@@ -59,13 +56,10 @@
   "reservation_successful": "Reservation Successful",
   "reservation_success_message": "You have successfully reserved a spot for the appointment!",
   "close": "Close",
-
   "id": "ID",
   "company": "Company",
-
   "client_name": "Client Name",
   "client_account": "Client Account",
-
   "status": "Status",
   "completed": "Completed",
   "not_completed": "Not Completed"
